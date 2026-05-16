@@ -1,0 +1,23 @@
+{
+  "project_info": {
+    "project_number": "100000000000",
+    "project_id": "tetraverse-game",
+    "storage_bucket": "tetraverse-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100000000000:android:abcdef123456",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

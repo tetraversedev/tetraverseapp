@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "473258623128",
+    "firebase_url": "https://myapplication-a472081a-default-rtdb.firebaseio.com",
+    "project_id": "myapplication-a472081a",
+    "storage_bucket": "myapplication-a472081a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473258623128:android:3f2ac05d60ab266e4710ed",
+        "android_client_info": {
+          "package_name": "com.tetraverse.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeOXdiW4pdXQYeNCxVRV-W7sv1dIagCJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
