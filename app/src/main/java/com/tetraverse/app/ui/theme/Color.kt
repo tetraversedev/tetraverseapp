@@ -2,14 +2,13 @@ package com.tetraverse.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val DarkBg = Color(0xFF03001C)
+val DarkBg = Color(0xFF121212)
 val DeepPurple = Color(0xFF301E67)
 val NeonBlue = Color(0xFF5B8FB9)
 val ElectricCyan = Color(0xFFB6EADA)
-val NeonPink = Color(0xFFFF00E5)
-val NeonGreen = Color(0xFF39FF14)
-val NeonYellow = Color(0xFFFFE700)
-val SurfaceDark = Color(0xFF16213E)
+val NeonPink = Color(0xFFFF00CC) // Match the logo's Hot Pink
+val LogoYellow = Color(0xFFFFE700) // Match the sub-text yellow
+val SurfaceDark = Color(0xFF1E1E1E)
 val GlassWhite = Color(0x1AFFFFFF)
 
 val TetrisI = Color(0xFF00FFFF)
