@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var audio: AudioManager
 
     // --- Config ---
-    private val TREASURY_ADDRESS = "FjCNH5rP4sgzWgLb7nqLESNsPhsmxV2rTGDGakC9WoqE" // Real address
+    private val TREASURY_ADDRESS = "AaUtvduiu2DxBWEe9kNe74WMhMMf4qLGssVRfiafaC5N" // Real address
     private val RPC_URL = "https://api.mainnet-beta.solana.com" // Use standard public RPC
     private val connection = Connection(RPC_URL)
 
