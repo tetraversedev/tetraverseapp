@@ -32,6 +32,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var audio: AudioManager
 
     // --- Config ---
+    private val APP_VERSION = "v2.0.0-release"
     private val TREASURY_ADDRESS = "AaUtvduiu2DxBWEe9kNe74WMhMMf4qLGssVRfiafaC5N" // Real address
     private val RPC_URL = "https://api.mainnet-beta.solana.com" // Use standard public RPC
     private val connection = Connection(RPC_URL)
@@ -54,6 +55,7 @@ class MainActivity : ComponentActivity() {
                 var isWalletConnected by remember { mutableStateOf(false) }
                 var walletAddress by remember { mutableStateOf("") }
                 var latestSignature by remember { mutableStateOf(prefs.getString("last_sig", "") ?: "") }
+                var isLoading by remember { mutableStateOf(false) }
                 
                 var selectedAvatarId by remember { 
                     mutableIntStateOf(prefs.getInt("avatar_id", 0)) 
@@ -85,7 +87,7 @@ class MainActivity : ComponentActivity() {
                 val connectionIdentity = remember {
                     ConnectionIdentity(
                         identityUri = Uri.parse("https://tetraverse.vercel.app/"),
-                        iconUri = Uri.parse("https://tetraverse.vercel.app/favicon.ico"),
+                        iconUri = Uri.parse("icon.png"),
                         identityName = "Tetraverse"
                     )
                 }
@@ -94,10 +96,11 @@ class MainActivity : ComponentActivity() {
                 fun connectSeekerWallet() {
                     scope.launch {
                         try {
+                            isLoading = true
                             val result = walletAdapter.transact(sender) {
                                 val auth = authorize(
                                     identityUri = Uri.parse("https://tetraverse.vercel.app/"),
-                                    iconUri = Uri.parse("https://tetraverse.vercel.app/favicon.ico"),
+                                    iconUri = Uri.parse("icon.png"),
                                     identityName = "Tetraverse",
                                     chain = "solana:mainnet" // Mainnet
                                 )
@@ -117,11 +120,13 @@ class MainActivity : ComponentActivity() {
                                     Toast.makeText(this@MainActivity, "Connection Failed: ${result.e.message}", Toast.LENGTH_LONG).show()
                                 }
                                 is TransactionResult.NoWalletFound -> {
-                                    Toast.makeText(this@MainActivity, "No Solana wallet found", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(this@MainActivity, "No Solana wallet found. Please install Phantom or Solflare.", Toast.LENGTH_LONG).show()
                                 }
                             }
                         } catch (e: Exception) {
                             Toast.makeText(this@MainActivity, "Connection Error: ${e.message}", Toast.LENGTH_LONG).show()
+                        } finally {
+                            isLoading = false
                         }
                     }
                 }
@@ -134,6 +139,7 @@ class MainActivity : ComponentActivity() {
 
                     scope.launch {
                         try {
+                            isLoading = true
                             Toast.makeText(this@MainActivity, "Building Transaction for ${skin.price}...", Toast.LENGTH_SHORT).show()
                             
                             // 1. Fetch blockhash from RPC (on IO thread)
@@ -145,7 +151,7 @@ class MainActivity : ComponentActivity() {
                                 // 2. Re-authorize
                                 val auth = authorize(
                                     identityUri = Uri.parse("https://tetraverse.vercel.app/"),
-                                    iconUri = Uri.parse("https://tetraverse.vercel.app/favicon.ico"),
+                                    iconUri = Uri.parse("icon.png"),
                                     identityName = "Tetraverse",
                                     chain = "solana:mainnet" // Mainnet
                                 )
@@ -196,11 +202,13 @@ class MainActivity : ComponentActivity() {
                                     Toast.makeText(this@MainActivity, "Transaction Failed: ${result.e.message}", Toast.LENGTH_LONG).show()
                                 }
                                 is TransactionResult.NoWalletFound -> {
-                                    Toast.makeText(this@MainActivity, "No Solana wallet found", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(this@MainActivity, "No Solana wallet found. Please install Phantom or Solflare.", Toast.LENGTH_LONG).show()
                                 }
                             }
                         } catch (e: Exception) {
                             Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                        } finally {
+                            isLoading = false
                         }
                     }
                 }
@@ -221,7 +229,9 @@ class MainActivity : ComponentActivity() {
                             walletAddress = walletAddress,
                             latestSignature = latestSignature,
                             selectedAvatarId = selectedAvatarId,
-                            equippedColor = equippedColors?.firstOrNull()
+                            equippedColor = equippedColors?.firstOrNull(),
+                            isLoading = isLoading,
+                            appVersion = APP_VERSION
                         )
                     }
                     composable("game") {
@@ -244,7 +254,8 @@ class MainActivity : ComponentActivity() {
                             onAvatarSelected = { id -> selectedAvatarId = id },
                             onEquipSkin = { id -> equippedSkinId = id },
                             onBack = { navController.popBackStack() },
-                            onPurchase = { skin -> purchaseSkin(skin) }
+                            onPurchase = { skin -> purchaseSkin(skin) },
+                            isLoading = isLoading
                         )
                     }
                     composable("leaderboard") {

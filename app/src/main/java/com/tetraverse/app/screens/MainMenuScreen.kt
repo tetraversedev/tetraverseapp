@@ -52,7 +52,9 @@ fun MainMenuScreen(
     walletAddress: String,
     latestSignature: String,
     selectedAvatarId: Int,
-    equippedColor: Color? = null
+    equippedColor: Color? = null,
+    isLoading: Boolean = false,
+    appVersion: String = ""
 ) {
     val charScale = rememberInfiniteTransition(label = "").animateFloat(
         initialValue = 0.97f, 
@@ -170,6 +172,29 @@ fun MainMenuScreen(
                     colors = ButtonDefaults.textButtonColors(contentColor = Color.White.copy(alpha = 0.4f))
                 ) {
                     Text("TERMS", fontSize = 10.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                }
+            }
+
+            if (appVersion.isNotEmpty()) {
+                Text(
+                    text = appVersion,
+                    color = Color.White.copy(alpha = 0.15f),
+                    fontSize = 9.sp,
+                    fontWeight = FontWeight.Light,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+            }
+        }
+
+        if (isLoading) {
+            Box(
+                modifier = Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.7f)).clickable(enabled = false) {},
+                contentAlignment = Alignment.Center
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    CircularProgressIndicator(color = NeonBlue)
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text("SYNCHRONIZING WITH SOLANA...", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                 }
             }
         }

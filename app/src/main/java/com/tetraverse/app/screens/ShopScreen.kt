@@ -38,7 +38,8 @@ fun ShopScreen(
     onAvatarSelected: (Int) -> Unit,
     onEquipSkin: (Int) -> Unit,
     onBack: () -> Unit, 
-    onPurchase: (Skin) -> Unit
+    onPurchase: (Skin) -> Unit,
+    isLoading: Boolean = false
 ) {
     var selectedTab by remember { mutableIntStateOf(0) } // 0: Skins, 1: Avatars
     var selectedSkin by remember { mutableStateOf<Skin?>(premiumSkins[0]) }
@@ -122,6 +123,7 @@ fun ShopScreen(
                                 onPurchase(skin)
                             }
                         },
+                        enabled = !isLoading,
                         modifier = Modifier.fillMaxWidth().height(60.dp).shadow(12.dp, RoundedCornerShape(20.dp), spotColor = if (skin.id == 5) NeonYellow else NeonBlue),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = when {
@@ -159,6 +161,19 @@ fun ShopScreen(
                     items(avatarList.size) { id ->
                         AvatarThumb(id, isSelected = currentAvatarId == id) { onAvatarSelected(id) }
                     }
+                }
+            }
+        }
+
+        if (isLoading) {
+            Box(
+                modifier = Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.7f)).clickable(enabled = false) {},
+                contentAlignment = Alignment.Center
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    CircularProgressIndicator(color = NeonBlue)
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text("WAITING FOR WALLET...", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                 }
             }
         }
