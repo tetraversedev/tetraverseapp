@@ -84,8 +84,8 @@ class MainActivity : ComponentActivity() {
                 // --- Solana Logic ---
                 val connectionIdentity = remember {
                     ConnectionIdentity(
-                        identityUri = Uri.parse("https://tetraverse.io"),
-                        iconUri = Uri.parse("favicon.ico"),
+                        identityUri = Uri.parse("https://tetraverse.vercel.app/"),
+                        iconUri = Uri.parse("https://tetraverse.vercel.app/favicon.ico"),
                         identityName = "Tetraverse"
                     )
                 }
@@ -96,8 +96,8 @@ class MainActivity : ComponentActivity() {
                         try {
                             val result = walletAdapter.transact(sender) {
                                 val auth = authorize(
-                                    identityUri = Uri.parse("https://tetraverse.io"),
-                                    iconUri = Uri.parse("favicon.ico"),
+                                    identityUri = Uri.parse("https://tetraverse.vercel.app/"),
+                                    iconUri = Uri.parse("https://tetraverse.vercel.app/favicon.ico"),
                                     identityName = "Tetraverse",
                                     chain = "solana:mainnet" // Mainnet
                                 )
@@ -144,8 +144,8 @@ class MainActivity : ComponentActivity() {
                             val result = walletAdapter.transact(sender) {
                                 // 2. Re-authorize
                                 val auth = authorize(
-                                    identityUri = Uri.parse("https://tetraverse.io"),
-                                    iconUri = Uri.parse("favicon.ico"),
+                                    identityUri = Uri.parse("https://tetraverse.vercel.app/"),
+                                    iconUri = Uri.parse("https://tetraverse.vercel.app/favicon.ico"),
                                     identityName = "Tetraverse",
                                     chain = "solana:mainnet" // Mainnet
                                 )

@@ -20,6 +20,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,6 +60,7 @@ fun MainMenuScreen(
         animationSpec = infiniteRepeatable(tween(2500, easing = LinearOutSlowInEasing), RepeatMode.Reverse), 
         label = ""
     )
+    val uriHandler = LocalUriHandler.current
 
     Box(modifier = Modifier.fillMaxSize().background(DarkBg)) {
         Box(modifier = Modifier.size(400.dp).align(Alignment.TopEnd).offset(100.dp, (-100).dp).blur(100.dp).background(NeonBlue.copy(0.1f), CircleShape))
@@ -147,7 +149,29 @@ fun MainMenuScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+            
+            Row(
+                modifier = Modifier.padding(bottom = 8.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextButton(
+                    onClick = { uriHandler.openUri("https://tetraverse.vercel.app/privacy.html") },
+                    colors = ButtonDefaults.textButtonColors(contentColor = Color.White.copy(alpha = 0.4f))
+                ) {
+                    Text("PRIVACY", fontSize = 10.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                }
+                
+                Text("|", color = Color.White.copy(alpha = 0.2f), fontSize = 10.sp)
+
+                TextButton(
+                    onClick = { uriHandler.openUri("https://tetraverse.vercel.app/terms.html") },
+                    colors = ButtonDefaults.textButtonColors(contentColor = Color.White.copy(alpha = 0.4f))
+                ) {
+                    Text("TERMS", fontSize = 10.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                }
+            }
         }
     }
 }

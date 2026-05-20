@@ -9,10 +9,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.tetraverse.app" />
+                  <option name="mobileSdkAppId" value="1:473258623128:android:3f2ac05d60ab266e4710ed" />
+                  <option name="projectId" value="myapplication-a472081a" />
+                  <option name="projectNumber" value="473258623128" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
